@@ -94,5 +94,5 @@ console.log(error)
 
 
 app.listen(port,()=>{
-    console.log(`Server is running at 3000`);
+    console.log(`Server is running at ${port}`);
 })
