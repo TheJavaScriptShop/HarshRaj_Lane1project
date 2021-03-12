@@ -69,7 +69,7 @@ app.post('/response',urlencodedParser,(req,res)=>{          //api to get respons
         path:`./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`,              //path where pdf will be stored
         type:"pdf"
     };
-    console.log(document.data.users);    //for debugging purpose
+   // console.log(document.data.users);    //for debugging purpose
 
 pdf.create(document,options)          //function which create pdf
 .then((res)=>{
@@ -80,8 +80,8 @@ console.log(res);
 console.log(error)
 })
 
-    console.log(req.body);
-    console.log(empname);
+    //console.log(req.body);
+    //console.log(empname);
     res.status(200).send("your request has been accepted")
    // res.sendFile(path.join(__dirname,'output'))
 })
