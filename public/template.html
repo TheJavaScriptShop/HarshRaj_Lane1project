@@ -7,29 +7,50 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<style>
+.label {
+     display: inline-block;
+     margin-top: 50px;
+     width: 450px; 
+     text-decoration: overline;
+}
+.label1 {
+     display: inline-block;
+     margin-top: 50px;
+     width: 450px; 
+     text-decoration: overline;
+}
+
+</style>
 
 </head>
 <body>
+  
   <nav class="d-flex flex-row-reverse">
     <a class="navbar-brand" href="#">
-       <img src="http://localhost:4000/banner-with-logo.png" style="width:100px;">
+       <img src="http://localhost:3000/banner-with-logo.png" style="width:100px;">
     </a>
 </nav>
+
 {{#each users}}
-<p style="text-align:center;width: 580px;font-family: 'Montserrat', sans-serif;font-weight: bold" class="text-body bg-light font-weight-bold">Pay-slip for the period of {{this.month}}</p>
+<p style="text-align:center;width:580px;font-family: 'Montserrat', sans-serif;" class="text-body bg-light font-weight-bold ">Pay-slip for the period of {{this.month}}</p>
 {{/each}}
-<ul>                          
+
+  <div id="empdetails" class="border border-dark rounded " style="width:580px;margin-bottom: 10px;font-family: 'Montserrat', sans-serif">  
     {{#each users}}
-      <li>Name: {{this.name}}</li>
-      <li>Employeeid: {{this.empid}}</li>
-      <li>Month: {{this.month}}</li>
-      <li>Salary: {{this.salary}}</li>
+      <p style="margin-left:10px" class="align-middle">Name: {{this.name}}</p>
+      <p style="margin-left:10px">Employeeid: {{this.empid}}</p>
+      <p style="margin-left:10px">Month: {{this.month}}</p>
+      <p style="margin-left:10px">Salary: {{this.salary}}</p>
     {{/each}}
-  </ul>
-  <table class="table table-bordered " style="height:auto;width:580px" >
+  </div>
+
+  <table class="table-secondary offset-lg-4" style="height:auto;width:580px;text-align: center;" >
     {{#each users}}
       <thead>
-        <tr>
+        <tr class="font-family: 'Montserrat', sans-serif">
           <th scope="col" >Employeeid</th>
           <th scope="col" >EmployeeName</th>
           <th scope="col" >Month</th>
@@ -46,6 +67,9 @@
       </tbody>
       {{/each}}
     </table>
+    <span class="label">Employer's sign</span> <span class="label1">Employees sign</span>
+  
+    
  <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
