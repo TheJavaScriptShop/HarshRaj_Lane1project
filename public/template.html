@@ -3,26 +3,50 @@
 <head>
 <title>Node PDF Creator</title>
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
 </head>
 <body>
-<div>
-  <img src="./banner-with-logo.png"/>
-</div>
-<h1>User Payslip</h1>
-<ul>
+  <nav class="d-flex flex-row-reverse">
+    <a class="navbar-brand" href="#">
+       <img src="http://localhost:4000/banner-with-logo.png" style="width:100px;">
+    </a>
+</nav>
+{{#each users}}
+<p style="text-align:center;width: 580px;font-family: 'Montserrat', sans-serif;font-weight: bold" class="text-body bg-light font-weight-bold">Pay-slip for the period of {{this.month}}</p>
+{{/each}}
+<ul>                          
     {{#each users}}
       <li>Name: {{this.name}}</li>
       <li>Employeeid: {{this.empid}}</li>
       <li>Month: {{this.month}}</li>
       <li>Salary: {{this.salary}}</li>
-      <br>
     {{/each}}
   </ul>
-  
-  
-  <!-- Optional JavaScript -->
+  <table class="table table-bordered " style="height:auto;width:580px" >
+    {{#each users}}
+      <thead>
+        <tr>
+          <th scope="col" >Employeeid</th>
+          <th scope="col" >EmployeeName</th>
+          <th scope="col" >Month</th>
+          <th scope="col" >Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{this.empid}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.month}}</td>
+          <td>{{this.salary}}</td>
+        </tr>
+      </tbody>
+      {{/each}}
+    </table>
+ <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

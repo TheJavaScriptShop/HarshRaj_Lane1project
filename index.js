@@ -6,10 +6,7 @@ var fs=require("fs");
 var path=require("path");
 var html=fs.readFileSync(path.join(__dirname,"./public/template.html"),"utf8");
 
-
-
-
-const dotenv=require('dotenv');
+const dotenv=require('dotenv');        //for environmental variable
 dotenv.config();
 const port=process.env.PORT;
 
