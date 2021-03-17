@@ -15,19 +15,22 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const options={
+const pdfoptions={
     format: "A4",
     orientation: "portrait",
     border: "1mm",
 };
 
-app.use(express.static(__dirname + 'public')); //Serves resources from public folder
+//Serves resources from public folder
+app.use(express.static(__dirname + 'public'));
 
-app.get('/form',(req,res)=>{                                //api to render form
+//api to render form
+app.get('/form',(req,res)=>{
     res.sendFile(path.join(__dirname,'public'))
 })
 
-app.post('/response',urlencodedParser,(req,res)=>{          //api to get response
+//api to get response
+app.post('/response',urlencodedParser,(req,res)=>{
         let {empname,empid,month,salary}=req.body;
         if(!req.body)
          {
@@ -42,8 +45,7 @@ app.post('/response',urlencodedParser,(req,res)=>{          //api to get respons
             }
         ];
       let pdfFilePath=`./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
-     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
-        let document={
+        let pdfdocument={
             html:html,
             data:{
             users:users
@@ -51,7 +53,7 @@ app.post('/response',urlencodedParser,(req,res)=>{          //api to get respons
             path: pdfFilePath,
             type:""
         };
-       pdf.create(document,options)
+       pdf.create(pdfdocument,pdfoptions)
        .then(()=>{
             let files = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
