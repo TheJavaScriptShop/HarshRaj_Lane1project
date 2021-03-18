@@ -11,20 +11,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
 <style>
-.EmployerSign {
-     display: inline-block;
+#EmployerSign {
      margin-top: 50px;
-     width: 450px;
      text-decoration: overline;
-     margin-left: 35px;
      font-family: 'Montserrat', 'sans-serif';
      font-size: 10px;
      font-weight: bold;
 }
-.EmployeeSign {
-     display: inline-block;
+#EmployeeSign {
      margin-top: 50px;
-     width: 450px;
      text-decoration: overline;
      font-family: 'Montserrat', 'sans-serif';
      font-size: 10px;
@@ -166,9 +161,17 @@
     </table>
   </div>
 
- <!--For Signature Purpose--->
- <span class="EmployerSign">Employer's sign</span>
- <span class="EmployeeSign">Employees sign</span>
+<!--For Signature Purpose--->
+  <div class="conatiner">
+      <div class="d-flex justify-content-between" style="width:500px">
+          <div id="EmployerSign" style="margin-left:45px">
+              Employer's sign
+          </div>
+          <div id="EmployeeSign" style="margin-right:-30px">
+              Employee sign
+          </div>
+      </div>
+  </div>
 
 <!--This Div contains Disclaimer section-->
   <div class="bg-light"style="font-family:'Montserrat', 'sans-serif';font-size:10px;margin-top: 170px;margin-left: 8px;">
