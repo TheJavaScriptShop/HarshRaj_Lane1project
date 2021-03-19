@@ -30,7 +30,7 @@
 
 <body>
   <!--Table has Company Logo and Address Details-->
-<table>
+<!-- <table>
   <tbody style="width:160vw; display: table;font-size: 10px;margin-top: 20px">
   <tr>
     <td colspan="1" rowspan="4">
@@ -53,54 +53,67 @@
         </td>
   </tr>
   </tbody>
-</table>
+</table> -->
+  <div class="container">
+      <div class="d-flex flex-column p-3">
+          <div>
+                <img src="http://localhost:3000/banner-with-logo.png" style="width:320px;height:50px;margin-left:110px">
+          </div>
+          <div class="p-2"style="font-family: 'Montserrat', sans-serif;font-size:10px;font-weight:600;margin-left:90px;">
+              #1B,WeWork
+              Financial District,Nanakramguda,
+              Hyderabad,500032
+          </div>
+      </div>
+
+  </div>
 
 {{#each users}}
-<p style="text-align:center;width:600px;font-family: 'Montserrat', sans-serif;margin-top:50px;margin-bottom: 15px" class="text-body bg-light font-weight-bold ">Pay-slip for the period of February,2020</p>
+<p style="text-align:center;width:600px;font-family: 'Montserrat', sans-serif;margin-top:50px;margin-bottom: 15px" class="text-body font-weight-bold ">Payslip for the period of February,2020</p>
 {{/each}}
 
 <!--This div contains Employee details-->
-  <div style="width:580px;margin-bottom: 10px;margin-left:35px;margin-top:50px  ; font-family: 'Montserrat', sans-serif;font-size:10px">
+  <div style="width:580px;margin-bottom: 10px;margin-left:35px;margin-top:50px  ; font-family: 'Montserrat', sans-serif;font-size:10px;">
    <table>
      <tr>
          <td class="float-left">
             EmployeeID
           </td>
-          <td style="text-align:right"> 1</td>
+          <td style="text-align:right;font-weight: 700"> 1</td>
          <td class="float-left" style="margin-left:180px">
             Name
          </td>
-         <td style="text-align:right"> Harsh raj mishra</td>
+         <td style="text-align:right;font-weight: 700"> Harsh raj mishra</td>
      </tr>
      <tr>
         <td class="float-left">
            Department
          </td>
-         <td style="text-align:right"> IT</td>
+         <td style="text-align:right;font-weight: 700"> IT</td>
         <td class="float-left" style="margin-left:180px">
            Designation
         </td>
-        <td style="text-align:right"> software developer</td>
+        <td style="text-align:right;font-weight: 700"> software developer</td>
     </tr>
     <tr>
         <td class="float-left">
            Account No
          </td>
-         <td style="text-align:right"> 1234556788</td>
+         <td style="text-align:right;font-weight: 700"> 1234556788</td>
         <td class="float-left" style="margin-left:180px">
            PF Account No
         </td>
-        <td style="text-align:right"> Harsh12234</td>
+        <td style="text-align:right;font-weight: 700"> Harsh12234</td>
     </tr>
     <tr>
         <td class="float-left">
            Date Of Joining
          </td>
-         <td style="text-align:right"> 20/12/2021</td>
+         <td style="text-align:right;font-weight: 700"> 20/12/2021</td>
         <td class="float-left" style="margin-left:180px">
            No of day worked
         </td>
-        <td style="text-align:right"> 20</td>
+        <td style="text-align:right;font-weight: 700"> 20</td>
     </tr>
    </table>
   </div>
@@ -163,20 +176,22 @@
 
 <!--For Signature Purpose--->
   <div class="conatiner">
-      <div class="d-flex justify-content-between" style="width:500px">
+      <div class="d-flex justify-content-between" style="width:500px;margin-top:40px">
           <div id="EmployerSign" style="margin-left:45px">
               Employer's sign
           </div>
           <div id="EmployeeSign" style="margin-right:-30px">
               Employee sign
           </div>
+
       </div>
+
   </div>
 
 <!--This Div contains Disclaimer section-->
-  <div class="bg-light"style="font-family:'Montserrat', 'sans-serif';font-size:10px;margin-top: 170px;margin-left: 8px;">
+  <div style="font-family:'Montserrat', 'sans-serif';font-size:10px;margin-top: 100px;margin-left:38px;">
     <h6 style="font-weight:bold;text-decoration: underline;font-size: 10px">Disclaimer</h6>
-    <p>This section will contain Disclaimer about the payslip doc from the company</p>
+    <p>Computer generated payslip does not require attestation.</p>
   </div>
 
  <!-- Optional JavaScript -->
