@@ -41,7 +41,8 @@ app.post('/response',urlencodedParser,(req,res)=>{
                 name:empname,
                 empid:empid,
                 month:month,
-                salary:salary
+                salary:salary,
+                host: process.env.URL,
             }
         ];
       let pdfFilePath=`./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
