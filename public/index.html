@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,43 +11,67 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>PDF-Generator</title>
 </head>
+
 <body>
- <!--Navigation Bar Logo-->
- <nav class="d-flex flex-row-reverse">
-     <a class="navbar-brand" href="#">
-        <img src="./banner-with-logo.png" style="width:300px">
-     </a>
-  </nav>
+    <nav class="d-flex flex-row-reverse">
+        <a class="navbar-brand" href="#">
+            <img src="./banner-with-logo.png" style="width:300px;margin-right: 0px">
+        </a>
+    </nav>
 
     <div class="row">
-       <div class="col-sm-10 offset-lg-4 offset-sm-4 ">
-           <h1 class="text-secondary">Payslip form</h1>
+        <div class="col-sm-10 offset-lg-4 offset-sm-4 ">
+            <h1 class="text-secondary" style="margin-left:60px;font-size: 25px">Payslip form</h1>
         </div>
     </div>
 
-   <!--Div contains  Form-->
-    <div >
-        <div class="col-sm-6 col-lg-4  offset-sm-4 offset-lg-4 border border-dark rounded">
+    <div>
+        <div class="col-sm-6 col-lg-4  offset-sm-4 offset-lg-4 border border-dark rounded" style="margin-left:550px">
             <form method="POST" action="/response" target="blank" class="bg-light">
                 <div class="form-group ">
                     <label class="text-secondary" for="empname">Employee Name</label>
                     <input type="text" class="form-control" id="empname" name="empname">
-                 </div>
+                </div>
                 <div class="form-group">
                     <label class="text-secondary" for="empid">Employee Id</label>
                     <input type="text" class="form-control" id="empid" name="empid">
-                 </div>
-                 <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="Designation">Designation</label>
+                    <input type="text" class="form-control" id="Designation" name="Designation">
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="Acc_No">Account No</label>
+                    <input type="text" class="form-control" id="Acc_no" name="Acc_No">
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="PF_No">PF Account No</label>
+                    <input type="text" class="form-control" id="PF_No" name="PF_No">
+                </div>
+                <div class="form-group">
+                    <label class="text-secondary" for="D_O_J">Date Of Joining</label>
+                    <input type="date" class="form-control" id="D_O_J" name="D_O_J">
+                </div>
+                <div class="form-group">
                     <label class="text-secondary" for="month">month</label>
-                    <input type="month" class="form-control" id="month" name="month">
-                 </div>
-                 <div class="form-group">
+                    <input type="date" class="form-control" id="month" name="month">
+                </div>
+                <div class="form-group">
                     <label class="text-secondary" for="salary">Salary Amount</label>
                     <input type="text" class="form-control" id="salary" name="salary">
-                 </div>
+                </div>
+                <div class="form-group form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="pf" name="pf" value="250">
+                    <label class="form-check-label" for="pf">PF</label>
+                </div>
+                <div class="form-group form-check-inline mb-2">
+                    <input class="form-check-input" type="checkbox" id="professionalTax" name="professionalTax" value="250">
+                    <label class="form-check-label" for="professionalTax">Professional Tax</label>
+                </div>
                 <button type="submit" class="btn btn-primary col-lg-12">Submit</button>
-              </form>
+            </form>
         </div>
     </div>
-</body>
+
 </html>
+</body>
