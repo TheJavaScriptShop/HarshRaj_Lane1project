@@ -15,7 +15,7 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const options = {
+const optionsPdf = {
     format: "A4",
     orientation: "portrait",
     border: "1mm",
@@ -31,79 +31,59 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { empname, empid, month, salary, Designation, pf, D_O_J, professionalTax } = req.body;
+    let { employeeName, empployeeId, month, salary, designation, pf, doj, professionalTax } = req.body;
     if (!req.body) {
         res.send("missing details!!")
     }
 
     //Logic for salary details in payslip
     const basicPay = (0.40 * salary / 12).toFixed(2);
-    const DA = (0.20 * salary / 12).toFixed(2);
-    const HRA = (0.20 * salary / 12).toFixed(2);
+    const da = (0.20 * salary / 12).toFixed(2);
+    const hra = (0.20 * salary / 12).toFixed(2);
     const specialAllowance = (0.20 * salary / 12).toFixed(2);
-    const netpay = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
+    const netPay = parseFloat(basicPay) + parseFloat(da) + parseFloat(hra) + parseFloat(specialAllowance);
 
-    let PF = pf;//Let is used for re-assiging its value.
-    //Applying checks on PF checkbox.
-    if (PF == null) {
-
-        PF = 0;
-    }
-    else {
-
-        PF = req.body.pf;
-    }
+    providentFund = pf == null ? 0 : 250;
+    professionalTax = professionalTax == null ? 0 : 250;
 
     //Formating salary month
     let monthDate = month;
-    let newmonthDate = new Date(monthDate)
-    let monthYear = newmonthDate.getFullYear()
-    let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
-    let newDate = getMonth + "," + monthYear;
+    let newMonthDate = new Date(monthDate)
+    let monthYear = newMonthDate.getFullYear()
+    let getMonth = newMonthDate.toLocaleString('Default', { month: 'long' });
+    let newDate = getMonth + ", " + monthYear;
 
-    let ProfessionalTax = professionalTax;
-    //Applying checks on ProfessionalTax checkbox.
-    if (ProfessionalTax == null) {
-        //console.log('empty')
-        ProfessionalTax = 0
-    }
-    else {
-        ProfessionalTax = req.body.professionalTax;
-    }
+    let user =
+    {
+        name: employeeName,
+        empid: empployeeId,
+        designation,
+        month: newDate,
+        salary: salary,
+        basicPay,
+        da,
+        hra,
+        specialAllowance,
+        netPay,
+        providentFund,
+        doj,
+        professionalTax
+    };
 
-    let users = [
-        {
-            name: empname,
-            empid: empid,
-            Designation: Designation,
-            month: newDate,
-            salary: salary,
-            basepay: basicPay,
-            DA: DA,
-            HRA: HRA,
-            specialAllowance: specialAllowance,
-            netPay: netpay,
-            PF: PF,
-            D_O_J: D_O_J,
-            ProfessionalTax: ProfessionalTax
-        },
-    ];
-    let pdfFilePath = `./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
-    // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
+    let pdfFilePath = `./output/Payslip-${empployeeId}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
-        data: {
-            users: users
-        },
+        data: { user },
         path: pdfFilePath,
-        type: ""
     };
-    pdf.create(document, options)
+
+    pdf.create(document, optionsPdf)
         .then(() => {
-            let files = fs.createReadStream(pdfFilePath);
+            let fileStream = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
-                { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
-            files.pipe(res);
+                //here you can specify file name
+                { 'Content-disposition': 'attachment; filename=payslip.pdf' });
+            fileStream.pipe(res);
         })
         .catch((error) => {
             console.log(error)
