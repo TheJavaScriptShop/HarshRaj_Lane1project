@@ -15,7 +15,7 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const payment=require('./paymentLogic')
+const payment=require('./paymentlogic')
 
 const options = {
     format: "A4",
@@ -33,7 +33,7 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { empname, empid, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo } = req.body;
+    let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo } = req.body;
     if (!req.body) {
         res.send("missing details")
     }
@@ -43,16 +43,22 @@ app.post('/response', urlencodedParser, (req, res) => {
     const DA = payment.da(salary);
     const HRA = payment.hra(salary);
     const specialAllowance = payment.special(salary) ;
-    const netpay = (parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance)).toFixed(2);
-    //Let is used for re-assiging its value.
+    const netPay = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
     let PF = pf;
-    //Applying checks on PF checkbox.
+
+    //Logic for formatting payment details
+    const newbasicPay=payment.amountdata(basicPay);
+    const newDA=payment.amountdata(DA);
+    const newHRA=payment.amountdata(HRA);
+    const newspecialAllowance=payment.amountdata(specialAllowance);
+    const newnetPay=payment.amountdata(netPay)
+
+    //Applying checks for Provident Fund checbox
     if (PF == null) {
 
         PF = 0;
     }
     else {
-
         PF = req.body.pf;
     }
 
@@ -75,24 +81,24 @@ app.post('/response', urlencodedParser, (req, res) => {
 
     let users = [
         {
-            name: empname,
-            empid: empid,
-            Designation: Designation,
+            employeeName,
+            employeeID,
+            Designation,
             month: newDate,
-            salary: salary,
-            basepay: basicPay,
-            DA: DA,
-            HRA: HRA,
-            specialAllowance: specialAllowance,
-            netPay: netpay,
-            PF: PF,
-            D_O_J: D_O_J,
-            ProfessionalTax: ProfessionalTax,
+            salary,
+            basicPay:newbasicPay,
+            DA:newDA,
+            HRA:newHRA,
+            specialAllowance:newspecialAllowance,
+            netPay:newnetPay,
+            PF,
+            D_O_J,
+            ProfessionalTax,
             accountNo,
             providentfundNo
-        },
+        }
     ];
-    let pdfFilePath = `./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
+    let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,

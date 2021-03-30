@@ -1,22 +1,34 @@
 
 function basic(salary)
 {
-    const basicpay=(0.40 * salary).toFixed(2)
+    var basicpay=(0.40 * salary)
     return basicpay;
 }
 function da(salary)
 {
-    const basicpay=(0.20 * salary).toFixed(2)
-    return basicpay;
+    const DA=(0.20 * salary)
+    return DA;
 }
 function hra(salary)
 {
-    const basicpay=(0.20 * salary).toFixed(2)
-    return basicpay;
-}function special(salary)
+    const HRA=(0.20 * salary)
+    return HRA;
+}
+function special(salary)
 {
-    const basicpay=(0.20 * salary).toFixed(2)
-    return basicpay;
+    const Special=(0.20 * salary)
+    return Special;
+}
+
+function amountdata(amt){
+    var z=amt;
+    z=z.toString();
+    var lastThree = z.substring(z.length-3);
+    var otherNumbers = z.substring(0,z.length-3);
+    if(otherNumbers != '')
+        lastThree = ',' + lastThree;
+    var result1= otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return result1
 }
 
 module.exports={
@@ -24,4 +36,5 @@ module.exports={
     da,
     hra,
     special,
+    amountdata
 };
