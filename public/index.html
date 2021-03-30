@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,43 +11,90 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>PDF-Generator</title>
 </head>
+
 <body>
- <!--Navigation Bar Logo-->
- <nav class="d-flex flex-row-reverse">
-     <a class="navbar-brand" href="#">
-        <img src="./banner-with-logo.png" style="width:300px">
-     </a>
-  </nav>
+    <nav class="d-flex flex-row-reverse">
+        <a class="navbar-brand" href="#">
+            <img src="./banner-with-logo.png" style="width:300px;margin-right: 0px">
+        </a>
+    </nav>
 
     <div class="row">
-       <div class="col-sm-10 offset-lg-4 offset-sm-4 ">
-           <h1 class="text-secondary">Payslip form</h1>
+        <div class="offset-lg-2">
+            <h1 class="text-secondary">Payslip Form</h1>
         </div>
     </div>
 
-   <!--Div contains  Form-->
-    <div >
-        <div class="col-sm-6 col-lg-4  offset-sm-4 offset-lg-4 border border-dark rounded">
+    <div>
+        <div class="col-sm-12 col-lg-8   offset-lg-2 border border-dark rounded">
             <form method="POST" action="/response" target="blank" class="bg-light">
-                <div class="form-group ">
-                    <label class="text-secondary" for="empname">Employee Name</label>
-                    <input type="text" class="form-control" id="empname" name="empname">
-                 </div>
-                <div class="form-group">
-                    <label class="text-secondary" for="empid">Employee Id</label>
-                    <input type="text" class="form-control" id="empid" name="empid">
-                 </div>
-                 <div class="form-group">
-                    <label class="text-secondary" for="month">month</label>
-                    <input type="month" class="form-control" id="month" name="month">
-                 </div>
-                 <div class="form-group">
-                    <label class="text-secondary" for="salary">Salary Amount</label>
-                    <input type="text" class="form-control" id="salary" name="salary">
-                 </div>
-                <button type="submit" class="btn btn-primary col-lg-12">Submit</button>
-              </form>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group  ">
+                            <label class="text-secondary" for="empname">Employee Name</label>
+                            <input type="text" class="form-control" id="empname" name="empname">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="empid">Employee Id</label>
+                            <input type="text" class="form-control" id="empid" name="empid">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="Designation">Designation</label>
+                            <input type="text" class="form-control" id="Designation" name="Designation">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="accountNo">Account No</label>
+                            <input type="text" class="form-control" id="accountNo" name="accountNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="providentfundNo">Provident Fund Account No</label>
+                            <input type="text" class="form-control" id="providentfundNo" name="providentfundNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="D_O_J">Date Of Joining</label>
+                            <input type="date" class="form-control" id="D_O_J" name="D_O_J">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="month">Month</label>
+                            <input type="date" class="form-control" id="month" name="month">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="salary">Salary Amount</label>
+                            <input type="text" class="form-control" id="salary" name="salary" placeholder="Per month salary">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pf" name="pf" value="250">
+                            <label class="form-check-label" for="pf">Provident Fund</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group form-check-inline mb-2">
+                            <input class="form-check-input" type="checkbox" id="professionalTax" name="professionalTax"
+                                value="250">
+                            <label class="form-check-label" for="professionalTax">Professional Tax</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-lg-12">Submit</button>
+            </form>
         </div>
     </div>
+    </div>
 </body>
+
 </html>
