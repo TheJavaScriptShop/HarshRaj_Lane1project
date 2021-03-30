@@ -15,6 +15,8 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
+const payment=require('./paymentLogic')
+
 const options = {
     format: "A4",
     orientation: "portrait",
@@ -31,19 +33,19 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { empname, empid, month, salary, Designation, pf, D_O_J, professionalTax } = req.body;
+    let { empname, empid, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo } = req.body;
     if (!req.body) {
-        res.send("missing details!!")
+        res.send("missing details")
     }
 
     //Logic for salary details in payslip
-    const basicPay = (0.40 * salary / 12).toFixed(2);
-    const DA = (0.20 * salary / 12).toFixed(2);
-    const HRA = (0.20 * salary / 12).toFixed(2);
-    const specialAllowance = (0.20 * salary / 12).toFixed(2);
-    const netpay = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
-
-    let PF = pf;//Let is used for re-assiging its value.
+    const basicPay = payment.basic(salary);
+    const DA = payment.da(salary);
+    const HRA = payment.hra(salary);
+    const specialAllowance = payment.special(salary) ;
+    const netpay = (parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance)).toFixed(2);
+    //Let is used for re-assiging its value.
+    let PF = pf;
     //Applying checks on PF checkbox.
     if (PF == null) {
 
@@ -85,7 +87,9 @@ app.post('/response', urlencodedParser, (req, res) => {
             netPay: netpay,
             PF: PF,
             D_O_J: D_O_J,
-            ProfessionalTax: ProfessionalTax
+            ProfessionalTax: ProfessionalTax,
+            accountNo,
+            providentfundNo
         },
     ];
     let pdfFilePath = `./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
