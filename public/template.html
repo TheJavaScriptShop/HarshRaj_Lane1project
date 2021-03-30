@@ -35,7 +35,9 @@
     <div class="container">
         <div class="d-flex flex-column p-3">
             <div>
-                <img src="http://localhost:3000/banner-with-logo.png" style="width:320px;height:50px;margin-left:110px">
+                {{#each users}}
+                <img src="{{this.host}}/banner-with-logo.png" style="width:320px;height:50px;margin-left:110px">
+                {{/each}}
             </div>
             <div class="p-2" style="font-family: 'Montserrat', sans-serif;font-size:10px;font-weight:600;margin-left:90px;">
                 #1B,WeWork
@@ -67,6 +69,7 @@
                         Name
                     </td>
                     <td style="font-weight: 700;text-align: right;padding-right: 4px">{{this.name}}</td>
+                    
                 </tr>
                 <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
                     <td class="float-left p-1">
@@ -76,7 +79,11 @@
                     <td class="float-left p-1" style="margin-left:0px">
                         Designation
                     </td>
+
                     <td style="font-weight: 700;text-align: right;padding-right: 4px">{{this.Designation}}</td>
+
+                    
+
                 </tr>
                 <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
                     <td class="float-left p-1">
@@ -90,6 +97,7 @@
                 </tr>
                 <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
                     <td class="float-left p-1">
+
                         Date Of Joining
                     </td>
                     <td style="text-align:right;font-weight: 700;border-right:1px solid black;padding-right: 4px">{{this.D_O_J}}</td>
@@ -111,12 +119,14 @@
             <tbody>
                 <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
                     <td class="p-1">Basic Pay</td>
+
                     <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.basepay}}</td>
                     <td class="p-1">TDS</td>
-                    <td style="text-align: right;font-weight: bold;padding-right: 4px">20020</td>
+                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">20020</td>
                 </tr>
                 <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
                     <td class="p-1">Dearness Allowances</td>
+
                     <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.DA}}</td>
                     <td class="p-1">Provident Fund</td>
                     <td style="text-align: right;font-weight: bold;padding-right: 4px">{{this.PF}}</td>
@@ -141,7 +151,8 @@
                     <td class="p-1">Previous Balance</td>
                     <td>20020</td>
                     <td class="p-1">200002</td>
-                    <td style="text-align: right;padding-right: 4px">3455</td>
+                    <td class="p-1">Net Pay Off</td>
+                    
                 </tr>
                 <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px;font-weight: bold">
                     <td class="p-1">Carry Over Round-Off</td>
@@ -158,6 +169,7 @@
             <div id="EmployerSign" style="margin-left:45px">
                 Employer's sign
             </div>
+
         </div>
     </div>
 
