@@ -35,7 +35,7 @@ app.get('/form', (req, res) => {
 app.post('/response', urlencodedParser, (req, res) => {
     let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo } = req.body;
     if (!req.body) {
-        res.send("missing details!!")
+        res.send("missing details")
     }
 
     //Logic for salary details in payslip
@@ -53,14 +53,8 @@ app.post('/response', urlencodedParser, (req, res) => {
     const newspecialAllowance=payment.amountdata(specialAllowance);
     const newnetPay=payment.amountdata(netPay)
 
-    //Applying checks for Provident Fund checbox
-    if (PF == null) {
 
-        PF = 0;
-    }
-    else {
-        PF = req.body.pf;
-    }
+    var providentFund=PF==null?0:req.body.pf;
 
     //Formating salary month
     let monthDate = month;
@@ -69,17 +63,11 @@ app.post('/response', urlencodedParser, (req, res) => {
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
     let newDate = getMonth + "," + monthYear;
 
-    let ProfessionalTax = professionalTax;
-    //Applying checks on ProfessionalTax checkbox.
-    if (ProfessionalTax == null) {
-        //console.log('empty')
-        ProfessionalTax = 0
-    }
-    else {
-        ProfessionalTax = req.body.professionalTax;
-    }
 
-    let users = [
+    let ProfessionalTax = professionalTax;
+    var newprofessionalTax=ProfessionalTax==null?0:req.body.professionalTax
+
+    let users =[
         {
             employeeName,
             employeeID,
@@ -91,34 +79,26 @@ app.post('/response', urlencodedParser, (req, res) => {
             HRA:newHRA,
             specialAllowance:newspecialAllowance,
             netPay:newnetPay,
-            PF,
+            PF:providentFund,
             D_O_J,
-            ProfessionalTax,
+            ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo
         }
     ];
+    
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
         data: {
-            users: users
+            users
         },
         path: pdfFilePath,
         type: ""
     };
-      let pdfFilePath=`./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
-        let pdfdocument={
-            html:html,
-            data:{
-            users:users
-            },
-            path: pdfFilePath,
-            type:""
-        };
-       pdf.create(pdfdocument,pdfoptions)
-       .then(()=>{
+    pdf.create(document, options)
+        .then(() => {
             let files = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
                 { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
