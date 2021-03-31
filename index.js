@@ -17,7 +17,7 @@ app.use(express.static('public'))
 
 const payment=require('./paymentlogic')
 
-const pdfOptions = {
+const options = {
     format: "A4",
     orientation: "portrait",
     border: "1mm",
@@ -33,7 +33,7 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo } = req.body;
+    let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo,TDS } = req.body;
     if (!req.body) {
         res.send("missing details")
     }
@@ -43,7 +43,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     const DA = payment.da(salary);
     const HRA = payment.hra(salary);
     const specialAllowance = payment.special(salary) ;
-    const netPay = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
+    const calculatedEarning = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
     let PF = pf;
 
     //Logic for formatting payment details
@@ -51,10 +51,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     const newDA=payment.amountdata(DA);
     const newHRA=payment.amountdata(HRA);
     const newspecialAllowance=payment.amountdata(specialAllowance);
-    const newnetPay=payment.amountdata(netPay)
-
-
-    var providentFund=PF==null?0:req.body.pf;
+    const newtotalEarning=payment.amountdata(calculatedEarning)
 
     //Formating salary month
     let monthDate = month;
@@ -63,11 +60,18 @@ app.post('/response', urlencodedParser, (req, res) => {
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
     let newDate = getMonth + "," + monthYear;
 
-
+    let providentFund=PF==null?0:250;
     let ProfessionalTax = professionalTax;
-    var newprofessionalTax=ProfessionalTax==null?0:req.body.professionalTax
+    let newprofessionalTax=ProfessionalTax==null?0:250
 
-    let user =[
+    //Logic for total deductions and netPayment
+    let newTDS=Number(TDS)
+    let deductions=newTDS+providentFund+newprofessionalTax
+    const newtotalDeductions=payment.amountdata(deductions);
+    const totalPay=calculatedEarning-deductions;
+    const netPay=payment.amountdata(totalPay)
+
+    let users =[
         {
             employeeName,
             employeeID,
@@ -78,12 +82,15 @@ app.post('/response', urlencodedParser, (req, res) => {
             DA:newDA,
             HRA:newHRA,
             specialAllowance:newspecialAllowance,
-            netPay:newnetPay,
+            totalEarning:newtotalEarning,
             PF:providentFund,
             D_O_J,
             ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo,
+            TDS,
+            totalDeductions:newtotalDeductions,
+            netPay,
             host:process.env.URL
         }
     ];
@@ -93,17 +100,17 @@ app.post('/response', urlencodedParser, (req, res) => {
     let document = {
         html: html,
         data: {
-            user
+            users
         },
         path: pdfFilePath,
         type: ""
     };
-    pdf.create(document, pdfOptions)
+    pdf.create(document, options)
         .then(() => {
-            let file = fs.createReadStream(pdfFilePath);
+            let files = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
                 { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
-            file.pipe(res);
+            files.pipe(res);
         })
         .catch((error) => {
             console.log(error)
