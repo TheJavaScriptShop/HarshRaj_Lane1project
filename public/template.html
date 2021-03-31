@@ -11,88 +11,172 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-
-    <style>
-        #EmployerSign {
-            margin-top: 50px;
-            text-decoration: overline;
-            font-family: 'Montserrat', 'sans-serif';
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        #EmployeeSign {
-            margin-top: 50px;
-            text-decoration: overline;
-            font-family: 'Montserrat', 'sans-serif';
-            font-size: 10px;
-            font-weight: bold;
-        }
-    </style>
 </head>
+<style>
+    #EmployerSign {
+        margin-top: 50px;
+        text-decoration: overline;
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    #EmployeeSign {
+        margin-top: 50px;
+        text-decoration: overline;
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    #monthDisplay {
+        text-align: center;
+        width: 600px;
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 35px;
+    }
+
+    #Logo {
+        width: 320px;
+        height: 50px;
+        margin-left: 110px
+    }
+
+    #Address {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        margin-left: 90px;
+    }
+
+    #payslipDiv {
+        width: 520px;
+        margin-left: 35px;
+        margin-top: 50px;
+    }
+
+    #tableRow {
+        border-bottom: 1px solid black;
+        font-size: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #tableData {
+        text-align: right;
+        font-weight: 700;
+        border-right: 1px solid black;
+        padding-right: 4px
+    }
+
+    #tableNextData {
+        font-weight: 700;
+        text-align: right;
+        padding-right: 4px
+    }
+
+    #tableRowHeading {
+        border-bottom: 1px solid black;
+        font-size: 12px;
+        font-weight: bold
+    }
+
+    #tableBodyRow {
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 10px
+    }
+
+    #tableBodyData {
+        text-align: right;
+        border-right: 1px solid black;
+        font-weight: bold;
+        padding-right: 4px
+    }
+
+    #tableBodyNextData {
+        text-align: right;
+        font-weight: bold;
+        padding-right: 4px
+    }
+
+    #tableBodyLastRow {
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 10px;
+        border-top: 1px solid black;
+        font-weight: bold
+    }
+
+    #disclaimerDiv {
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 10px;
+        margin-left: 44px;
+        margin-top: 58px
+    }
+
+    #disclaimerDivHeading {
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 10px
+    }
+</style>
 
 <body>
     <div class="container">
         <div class="d-flex flex-column p-3">
             <div>
-                <img src="http://localhost:3000/banner-with-logo.png" style="width:320px;height:50px;margin-left:110px">
+                <img id="Logo" src="http://localhost:3000/banner-with-logo.png">
             </div>
-            <div class="p-2" style="font-family: 'Montserrat', sans-serif;font-size:10px;font-weight:600;margin-left:90px;">
+            <div id="Address" class="p-2">
                 #1B,WeWork
                 Financial District,Nanakramguda,
                 Hyderabad,500032
             </div>
         </div>
-
     </div>
 
     {{#each users}}
-    <p style="text-align:center;width:600px;font-family: 'Montserrat', sans-serif;margin-top:50px;margin-bottom: 15px"
-        class="text-body font-weight-bold ">Payslip for the period of {{this.month}}</p>
+    <p id="monthDisplay" class="text-body font-weight-bold">Payslip for the period of {{this.month}}</p>
     {{/each}}
 
-
     <!--This div contains payslip details-->
-    <div class=" border border-dark rounded" style="width:520px;margin-left:35px;margin-top:50px;">
+    <div class=" border border-dark rounded" id="payslipDiv">
         <table style="width:518px;">
             {{#each users}}
             <thead>
-                <tr class="font-family: 'Montserrat',sans-serif ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
+                <tr class="font-family: 'Montserrat',sans-serif ;" id="tableRow">
                     <td class="float-left p-1">
                         EmployeeID
                     </td>
-                    <td style="text-align:right;font-weight: 700;border-right:1px solid black;padding-right: 4px">
-                        {{this.empid}}</td>
+                    <td id="tableData"> {{this.employeeID}}</td>
                     <td class="float-left p-1" style="margin-left:0px">
                         Name
                     </td>
-                    <td style="font-weight: 700;text-align: right;padding-right: 4px">{{this.name}}</td>
+                    <td id="tableNextData">{{this.employeeName}}</td>
                 </tr>
-                <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
+                <tr class="font-family: 'Montserrat',' sans-serif' ;" id="tableRow">
                     <td class="float-left p-1">
                         Department
                     </td>
-                    <td style="text-align:right;font-weight: 700;border-right:1px solid black;padding-right: 4px"> IT</td>
+                    <td id="tableData"> IT</td>
                     <td class="float-left p-1" style="margin-left:0px">
                         Designation
                     </td>
-                    <td style="font-weight: 700;text-align: right;padding-right: 4px">{{this.Designation}}</td>
+                    <td id="tableNextData">{{this.Designation}}</td>
                 </tr>
-                <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
+                <tr class="font-family: 'Montserrat',' sans-serif' ;" id="tableRow">
                     <td class="float-left p-1">
-                        AccountNo
+                        Account No
                     </td>
-                    <td style="text-align:right;font-weight: 700;border-right:1px solid black;padding-right: 4px">123456</td>
+                    <td id="tableData">{{this.accountNo}}</td>
                     <td class="float-left p-1" style="margin-left:0px">
                         PF Account No
                     </td>
-                    <td style="font-weight: 700;text-align: right;padding-right: 4px">Harsh12334</td>
+                    <td id="tableNextData">{{this.providentfundNo}}</td>
                 </tr>
-                <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:10px;font-family: 'Montserrat',sans-serif ;">
+                <tr class="font-family: 'Montserrat',' sans-serif' ;" id="tableRow">
                     <td class="float-left p-1">
                         Date Of Joining
                     </td>
-                    <td style="text-align:right;font-weight: 700;border-right:1px solid black;padding-right: 4px">{{this.D_O_J}}</td>
+                    <td id="tableData">{{this.D_O_J}}</td>
                     <td class="float-left p-1" style="margin-left:0px">
                         No Of Days Worked
                     </td>
@@ -101,7 +185,7 @@
             </thead>
             <thead>
 
-                <tr class="font-family: 'Montserrat',' sans-serif' ;" style="border-bottom:1px solid black;font-size:12px;font-weight: bold">
+                <tr class="font-family: 'Montserrat',' sans-serif' ;" id="tableRowHeading">
                     <th scope="col" class="border-right-0 p-1" style="text-align: left;">Earnings</th>
                     <th scope="col" class="p-1" style="text-align: right;padding-right: 4px">Amount</th>
                     <th scope="col" class="p-1" style="border-left:1px solid black">Deductions</th>
@@ -109,39 +193,39 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
+                <tr id="tableBodyRow">
                     <td class="p-1">Basic Pay</td>
-                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.basepay}}</td>
+                    <td id="tableBodyData">{{this.basicPay}}</td>
                     <td class="p-1">TDS</td>
-                    <td style="text-align: right;font-weight: bold;padding-right: 4px">20020</td>
+                    <td id="tableBodyNextData">20020</td>
                 </tr>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
+                <tr id="tableBodyRow">
                     <td class="p-1">Dearness Allowances</td>
-                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.DA}}</td>
+                    <td id="tableBodyData">{{this.DA}}</td>
                     <td class="p-1">Provident Fund</td>
-                    <td style="text-align: right;font-weight: bold;padding-right: 4px">{{this.PF}}</td>
+                    <td id="tableBodyNextData">{{this.PF}}</td>
                 </tr>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
+                <tr id="tableBodyRow">
                     <td class="p-1">House Rent Allowances</td>
-                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.HRA}}</td>
+                    <td id="tableBodyData">{{this.HRA}}</td>
                     <td class="p-1">Professional Tax</td>
-                    <td style="text-align: right;font-weight: bold;padding-right: 4px">{{this.ProfessionalTax}}</td>
+                    <td id="tableBodyNextData">{{this.ProfessionalTax}}</td>
                 </tr>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px">
+                <tr id="tableBodyRow">
                     <td class="p-1">Special Allowances</td>
-                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.specialAllowance}}</td>
+                    <td id="tableBodyData">{{this.specialAllowance}}</td>
                 </tr>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px;border-top: 1px solid black;font-weight: bold">
+                <tr id="tableBodyLastRow">
                     <td class="p-1">Total Earnings</td>
-                    <td style="text-align:right;border-right:1px solid black;font-weight: bold;padding-right: 4px">{{this.netPay}}</td>
+                    <td id="tableBodyData">{{this.netPay}}</td>
                     <td class="p-1">Total Deduction</td>
                     <td style="text-align: right;font-weight: bold;padding-right: 4px">3455</td>
                 </tr>
-                <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px;border-top: 1px solid black;font-weight: bold">
+                <tr id="tableBodyLastRow">
                     <td class="p-1">Previous Balance</td>
-                    <td>20020</td>
-                    <td class="p-1">200002</td>
-                    <td style="text-align: right;padding-right: 4px">3455</td>
+                    <td>0</td>
+                    <td class="p-1">NetPay</td>
+                    <td style="text-align: right;padding-right: 4px"></td>
                 </tr>
                 <tr style="font-family:'Montserrat', 'sans-serif';font-size:10px;font-weight: bold">
                     <td class="p-1">Carry Over Round-Off</td>
@@ -162,8 +246,8 @@
     </div>
 
     <!--This Div contains Disclaimer section-->
-    <div style="font-family:'Montserrat', 'sans-serif';font-size:10px;margin-left:44px;margin-top: 58px">
-        <h6 style="font-weight:bold;text-decoration: underline;font-size: 10px">Disclaimer</h6>
+    <div id="disclaimerDiv">
+        <h6 id="disclaimerDivHeading">Disclaimer</h6>
         <p>Computer generated payslip does not require attestation.</p>
     </div>
 
