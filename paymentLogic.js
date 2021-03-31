@@ -27,8 +27,8 @@ function amountdata(amt){
     var otherNumbers = z.substring(0,z.length-3);
     if(otherNumbers != '')
         lastThree = ',' + lastThree;
-    var result1= otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return result1
+    var result= otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return result
 }
 
 module.exports={
