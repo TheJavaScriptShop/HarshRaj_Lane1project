@@ -108,8 +108,17 @@ app.post('/response', urlencodedParser, (req, res) => {
         path: pdfFilePath,
         type: ""
     };
-    pdf.create(document, options)
-        .then(() => {
+      let pdfFilePath=`./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
+        let pdfdocument={
+            html:html,
+            data:{
+            users:users
+            },
+            path: pdfFilePath,
+            type:""
+        };
+       pdf.create(pdfdocument,pdfoptions)
+       .then(()=>{
             let files = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
                 { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
