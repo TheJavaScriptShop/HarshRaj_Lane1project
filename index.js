@@ -17,7 +17,7 @@ app.use(express.static('public'))
 
 const payment=require('./paymentlogic')
 
-const options = {
+const pdfOptions = {
     format: "A4",
     orientation: "portrait",
     border: "1mm",
@@ -71,7 +71,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     const totalPay=calculatedEarning-deductions;
     const netPay=payment.amountdata(totalPay)
 
-    let users =[
+    let user =[
         {
             employeeName,
             employeeID,
@@ -100,17 +100,17 @@ app.post('/response', urlencodedParser, (req, res) => {
     let document = {
         html: html,
         data: {
-            users
+            user
         },
         path: pdfFilePath,
         type: ""
     };
-    pdf.create(document, options)
+    pdf.create(document, pdfOptions)
         .then(() => {
-            let files = fs.createReadStream(pdfFilePath);
+            let file = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
                 { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
-            files.pipe(res);
+            file.pipe(res);
         })
         .catch((error) => {
             console.log(error)
