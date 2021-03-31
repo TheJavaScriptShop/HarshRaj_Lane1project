@@ -60,6 +60,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
     let newDate = getMonth + "," + monthYear;
 
+    //Formatting check box values
     let providentFund=PF==null?0:250;
     let ProfessionalTax = professionalTax;
     let newprofessionalTax=ProfessionalTax==null?0:250
@@ -70,6 +71,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     const newtotalDeductions=payment.amountdata(deductions);
     const totalPay=calculatedEarning-deductions;
     const netPay=payment.amountdata(totalPay)
+    newTDS=payment.amountdata(newTDS);
 
     let user =[
         {
@@ -88,7 +90,7 @@ app.post('/response', urlencodedParser, (req, res) => {
             ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo,
-            TDS,
+            newTDS,
             totalDeductions:newtotalDeductions,
             netPay,
             host:process.env.URL
