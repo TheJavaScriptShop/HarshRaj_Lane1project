@@ -58,7 +58,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     let newmonthDate = new Date(monthDate)
     let monthYear = newmonthDate.getFullYear()
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
-    let newDate = getMonth + "," + monthYear;
+    let newDate = getMonth + ", " + monthYear;
 
     //Formatting check box values
     let providentFund=PF==null?0:250;
