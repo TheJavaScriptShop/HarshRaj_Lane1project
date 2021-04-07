@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,43 +11,119 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>PDF-Generator</title>
 </head>
+<script>
+    function myFunction() {
+        document.getElementById("myForm").reset();
+    }
+</script>
+
 <body>
- <!--Navigation Bar Logo-->
- <nav class="d-flex flex-row-reverse">
-     <a class="navbar-brand" href="#">
-        <img src="./banner-with-logo.png" style="width:300px">
-     </a>
-  </nav>
+    <nav class="d-flex flex-row-reverse">
+        <a class="navbar-brand" href="#">
+            <img src="./banner-with-logo.png" style="width:300px;margin-right: 0px">
+        </a>
+    </nav>
 
     <div class="row">
-       <div class="col-sm-10 offset-lg-4 offset-sm-4 ">
-           <h1 class="text-secondary">Payslip form</h1>
+        <div class="col-lg-2 offset-lg-2 offset-xs-2">
+            <h2 class="text-secondary">Payslip Form</h2>
         </div>
     </div>
 
-   <!--Div contains  Form-->
-    <div >
-        <div class="col-sm-6 col-lg-4  offset-sm-4 offset-lg-4 border border-dark rounded">
-            <form method="POST" action="/response" target="blank" class="bg-light">
-                <div class="form-group ">
-                    <label class="text-secondary" for="empname">Employee Name</label>
-                    <input type="text" class="form-control" id="empname" name="empname">
-                 </div>
-                <div class="form-group">
-                    <label class="text-secondary" for="empid">Employee Id</label>
-                    <input type="text" class="form-control" id="empid" name="empid">
-                 </div>
-                 <div class="form-group">
-                    <label class="text-secondary" for="month">month</label>
-                    <input type="month" class="form-control" id="month" name="month">
-                 </div>
-                 <div class="form-group">
-                    <label class="text-secondary" for="salary">Salary Amount</label>
-                    <input type="text" class="form-control" id="salary" name="salary">
-                 </div>
-                <button type="submit" class="btn btn-primary col-lg-12">Submit</button>
-              </form>
+    <div>
+        <div class="col-sm-12 col-lg-8   offset-lg-2 border border-dark rounded bg-light p-2">
+            <form method="POST" action="/response" target="blank" id="myForm">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group  ">
+                            <label class="text-secondary" for="employeeName">Employee Name</label>
+                            <input type="text" class="form-control" id="employeeName" name="employeeName">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="employeeID">Employee Id</label>
+                            <input type="text" class="form-control" id="employeeID" name="employeeID">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="Designation">Designation</label>
+                            <input type="text" class="form-control" id="Designation" name="Designation">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="accountNo">Account No</label>
+                            <input type="text" class="form-control" id="accountNo" name="accountNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="providentfundNo">Provident Fund Account No</label>
+                            <input type="text" class="form-control" id="providentfundNo" name="providentfundNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="D_O_J">Date Of Joining</label>
+                            <input type="date" class="form-control" id="D_O_J" name="D_O_J">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="salary">Salary Amount</label>
+                            <input type="text" class="form-control" id="salary" name="salary" placeholder="Per month salary">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="month">Month</label>
+                            <input type="date" class="form-control" id="month" name="month">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="form-group">
+                            <label class="text-secondary" for="TDS">TDS</label>
+                            <input type="text" class="form-control" id="TDS" name="TDS">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6 mt-4">
+                        <div class="form-group form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pf" name="pf">
+                            <label class="form-check-label" for="pf">Provident Fund</label>
+                            <input class="form-check-input ml-2" type="checkbox" id="professionalTax" name="professionalTax">
+                            <label class="form-check-label" for="professionalTax">Professional Tax</label>
+                        </div>
+                    </div>
+                    <button type="submit" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary col-lg-4 offset-lg-4">Submit</button>
+            </form>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Do You want to Reset the Form?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="myFunction()" data-dismiss="modal">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Modal Section Ends-->
         </div>
     </div>
+    </div>
 </body>
+
 </html>

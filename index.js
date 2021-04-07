@@ -35,7 +35,10 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo,TDS } = req.body;
+
+
+    let { employeeName,employeeID, month, salary, Designation,pf,dateOfJoining, professionalTax,accountNo,providentfundNo,TDS } = req.body;
+
     if (!req.body) {
         res.send("missing details")
     }
@@ -74,7 +77,11 @@ app.post('/response', urlencodedParser, (req, res) => {
     const netPay=payment.amountdata(totalPay)
     newTDS=payment.amountdata(newTDS)
 
-    let users =
+    
+   
+
+    let user =
+
         {
             employeeName,
             employeeID,
@@ -87,31 +94,37 @@ app.post('/response', urlencodedParser, (req, res) => {
             specialAllowance:newspecialAllowance,
             totalEarning:newtotalEarning,
             PF:providentFund,
-            D_O_J,
+            dateOfJoining,
             ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo,
             newTDS,
             totalDeductions:newtotalDeductions,
-            netPay
+            netPay,
+            host:process.env.URL
         }
-    
+ 
+
+
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
         data: {
-            users
+
+
+            user
+
         },
         path: pdfFilePath,
         type: ""
     };
     pdf.create(document, pdfOptions)
         .then(() => {
-            let files = fs.createReadStream(pdfFilePath);
+            let file = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
                 { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
-            files.pipe(res);
+            file.pipe(res);
         })
         .catch((error) => {
             console.log(error)
