@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT;
 
+
+
 const pdf = require("pdf-creator-node");
 const fs = require("fs");
 const path = require("path");
@@ -15,7 +17,9 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const options = {
+const payment=require('./paymentlogic')
+
+const pdfOptions = {
     format: "A4",
     orientation: "portrait",
     border: "1mm",
@@ -31,51 +35,50 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { empname, empid, month, salary, Designation, pf, D_O_J, professionalTax } = req.body;
+    let { employeeName,employeeID, month, salary, Designation, pf, D_O_J, professionalTax,accountNo,providentfundNo,TDS } = req.body;
     if (!req.body) {
         res.send("missing details")
     }
 
     //Logic for salary details in payslip
-    const basicPay = (0.40 * salary / 12).toFixed(2);
-    const DA = (0.20 * salary / 12).toFixed(2);
-    const HRA = (0.20 * salary / 12).toFixed(2);
-    const specialAllowance = (0.20 * salary / 12).toFixed(2);
-    const netpay = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
+    const basicPay = payment.basic(salary);
+    const DA = payment.da(salary);
+    const HRA = payment.hra(salary);
+    const specialAllowance = payment.special(salary) ;
+    const calculatedEarning = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
+    let PF = pf;
 
-    let PF = pf;//Let is used for re-assiging its value.
-    //Applying checks on PF checkbox.
-    if (PF == null) {
-
-        PF = 0;
-    }
-    else {
-
-        PF = req.body.pf;
-    }
+    //Logic for formatting payment details
+    const newbasicPay=payment.amountdata(basicPay);
+    const newDA=payment.amountdata(DA);
+    const newHRA=payment.amountdata(HRA);
+    const newspecialAllowance=payment.amountdata(specialAllowance);
+    const newtotalEarning=payment.amountdata(calculatedEarning)
 
     //Formating salary month
     let monthDate = month;
     let newmonthDate = new Date(monthDate)
     let monthYear = newmonthDate.getFullYear()
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
-    let newDate = getMonth + "," + monthYear;
+    let newDate = getMonth + ", " + monthYear;
 
+    let providentFund=PF==null?0:250;
     let ProfessionalTax = professionalTax;
-    //Applying checks on ProfessionalTax checkbox.
-    if (ProfessionalTax == null) {
-        //console.log('empty')
-        ProfessionalTax = 0
-    }
-    else {
-        ProfessionalTax = req.body.professionalTax;
-    }
+    let newprofessionalTax=ProfessionalTax==null?0:250
 
-    let user =
+    //Logic for total deductions and netPayment
+    let newTDS=Number(TDS)
+    let deductions=newTDS+providentFund+newprofessionalTax
+    const newtotalDeductions=payment.amountdata(deductions);
+    const totalPay=calculatedEarning-deductions;
+    const netPay=payment.amountdata(totalPay)
+    newTDS=payment.amountdata(newTDS)
+
+    let users =
         {
-            name: empname,
-            empid: empid,
-            Designation: Designation,
+            employeeName,
+            employeeID,
+            Designation,
             month: newDate,
             salary,
             basicPay:newbasicPay,
@@ -84,27 +87,26 @@ app.post('/response', urlencodedParser, (req, res) => {
             specialAllowance:newspecialAllowance,
             totalEarning:newtotalEarning,
             PF:providentFund,
-            dateOfJoining,
+            D_O_J,
             ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo,
             newTDS,
             totalDeductions:newtotalDeductions,
-            netPay,
-            host:process.env.URL
+            netPay
         }
-
+    
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
         data: {
-            users: users
+            users
         },
         path: pdfFilePath,
         type: ""
     };
-    pdf.create(document, options)
+    pdf.create(document, pdfOptions)
         .then(() => {
             let files = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
@@ -115,6 +117,7 @@ app.post('/response', urlencodedParser, (req, res) => {
             console.log(error)
         })
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running at ${port}`);
