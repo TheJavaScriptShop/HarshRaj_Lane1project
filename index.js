@@ -71,24 +71,30 @@ app.post('/response', urlencodedParser, (req, res) => {
         ProfessionalTax = req.body.professionalTax;
     }
 
-    let users = [
+    let user =
         {
             name: empname,
             empid: empid,
             Designation: Designation,
             month: newDate,
-            salary: salary,
-            basepay: basicPay,
-            DA: DA,
-            HRA: HRA,
-            specialAllowance: specialAllowance,
-            netPay: netpay,
-            PF: PF,
-            D_O_J: D_O_J,
-            ProfessionalTax: ProfessionalTax
-        },
-    ];
-    let pdfFilePath = `./output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
+            salary,
+            basicPay:newbasicPay,
+            DA:newDA,
+            HRA:newHRA,
+            specialAllowance:newspecialAllowance,
+            totalEarning:newtotalEarning,
+            PF:providentFund,
+            dateOfJoining,
+            ProfessionalTax:newprofessionalTax,
+            accountNo,
+            providentfundNo,
+            newTDS,
+            totalDeductions:newtotalDeductions,
+            netPay,
+            host:process.env.URL
+        }
+
+    let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
