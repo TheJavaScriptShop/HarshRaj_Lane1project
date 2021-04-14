@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Node PDF Creator</title>
     <!-- Bootstrap CSS -->
@@ -9,94 +8,64 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 </head>
 <style>
     .EmployerSign {
-
-   
-
-   
-
         margin-top: 50px;
         text-decoration: overline;
         font-size: 10px;
         font-weight: bold;
     }
-
-
     .monthDisplay {
         text-align: center;
         width: 600px;
         margin-top: 35px;
         font-weight: bold
     }
-
-
     .Logo {
-
         width: 320px;
         height: 50px;
         margin-left: 110px
     }
-
     .textfont {
         font-family: 'Montserrat', sans-serif;
     }
-
-
     .tdtextfont {
         font-family: 'Roboto', sans-serif;
     }
-
     .Address {
-
-   
         font-size: 10px;
         font-weight: 600;
         margin-left: 80px;
     }
-
-
     .payslipDiv {
         width: 520px;
         margin-left: 35px;
         margin-top: 50px;
     }
-
-
     .tableRow {
         border-bottom: 1px solid black;
         font-size: 10px;
-
     }
-
     .tableRowHeading {
         border-bottom: 1px solid black;
         font-size: 12px;
         font-weight: bold;
     }
-
-
     .tableBodyRow {
         font-size: 10px
     }
-
     .tableBodyLastRow {
         font-size: 10px;
         border-top: 1px solid black;
         font-weight: bold
     }
-
-
     .disclaimerDiv {
         font-size: 10px;
         margin-left: 44px;
         margin-top: 58px
     }
-
-
     .disclaimerDivHeading {
         font-weight: bold;
         text-decoration: underline;
@@ -108,7 +77,6 @@
     <div class="container">
         <div class="d-flex flex-column p-3">
             <div>
-
                 <img class="Logo" src="http://localhost:3000/banner-with-logo.png">
             </div>
             <div class="Address p-2 textfont">
@@ -118,7 +86,6 @@
             </div>
         </div>
     </div>
-
 
     <p class="monthDisplay textfont">Payslip for the period of {{users.month}}</p>
 
@@ -169,7 +136,6 @@
                 </tr>
             </thead>
             <thead>
-
                 <tr class="tableRowHeading">
                     <th scope="col" class="p-1 text-left tdtextfont ">Earnings</th>
                     <th scope="col" class="p-1 text-right border-right border-dark tdtextfont">Amount</th>
@@ -224,18 +190,14 @@
         <!--For Signature Purpose--->
         <div class="conatiner ml-5">
             <div class="d-flex justify-content-between">
-
                 <div class="EmployerSign textfont">
                     Employer's sign
                 </div>
             </div>
         </div>
-
         <!--This Div contains Disclaimer section-->
-
         <div class="ml-5 textfont disclaimerDiv">
             <h6 class="disclaimerDivHeading">Disclaimer</h6>
-
             <p>Computer generated payslip does not require attestation.</p>
         </div>
     </div>
@@ -247,6 +209,5 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 </body>
 </html>
