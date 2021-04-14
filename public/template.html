@@ -11,62 +11,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 </head>
 <style>
-    .EmployerSign {
+    .employer-sign {
         margin-top: 50px;
         text-decoration: overline;
         font-size: 10px;
         font-weight: bold;
     }
-    .monthDisplay {
+    .month-display {
         text-align: center;
         width: 600px;
         margin-top: 35px;
         font-weight: bold
     }
-    .Logo {
+    .logo {
         width: 320px;
         height: 50px;
         margin-left: 110px
     }
-    .textfont {
+    .text-font {
         font-family: 'Montserrat', sans-serif;
     }
-    .tdtextfont {
+    .td-text-font {
         font-family: 'Roboto', sans-serif;
     }
-    .Address {
+    .address {
         font-size: 10px;
         font-weight: 600;
         margin-left: 80px;
     }
-    .payslipDiv {
+    .payslip-div {
         width: 520px;
         margin-left: 35px;
         margin-top: 50px;
     }
-    .tableRow {
+    .table-row {
         border-bottom: 1px solid black;
         font-size: 10px;
     }
-    .tableRowHeading {
+    .table-row-heading {
         border-bottom: 1px solid black;
         font-size: 12px;
         font-weight: bold;
     }
-    .tableBodyRow {
+    .table-body-row {
         font-size: 10px
     }
-    .tableBodyLastRow {
+    .table-body-last-row {
         font-size: 10px;
         border-top: 1px solid black;
         font-weight: bold
     }
-    .disclaimerDiv {
+    .disclaimer-div {
         font-size: 10px;
         margin-left: 44px;
         margin-top: 58px
     }
-    .disclaimerDivHeading {
+    .disclaimer-div-heading {
         font-weight: bold;
         text-decoration: underline;
         font-size: 10px
@@ -77,9 +77,9 @@
     <div class="container">
         <div class="d-flex flex-column p-3">
             <div>
-                <img class="Logo" src="http://localhost:3000/banner-with-logo.png">
+                <img class="logo" src="http://localhost:3000/banner-with-logo.png">
             </div>
-            <div class="Address p-2 textfont">
+            <div class="address p-2 text-font">
                 #01B 102, WeWork
                 Financial District, Nanakramguda,
                 Hyderabad, 500032
@@ -87,100 +87,100 @@
         </div>
     </div>
 
-    <p class="monthDisplay textfont">Payslip for the period of {{users.month}}</p>
+    <p class="month-display text-font">Payslip for the period of {{user.month}}</p>
 
     <!--This div contains payslip details-->
-    <div class=" border border-dark rounded payslipDiv">
+    <div class=" border border-dark rounded payslip-div">
         <table style="width:518px;">
             <thead>
-                <tr class="tableRow">
-                    <td class="float-left p-1 textfont">
+                <tr class="table-row">
+                    <td class="float-left p-1 text-font">
                         EmployeeID
                     </td>
-                    <td class="text-right border-right border-dark p-1 font-weight-bold tdtextfont">
-                        {{users.employeeID}}</td>
-                    <td class="float-left p-1 textfont">
+                    <td class="text-right border-right border-dark p-1 font-weight-bold td-text-font">
+                        {{user.employeeID}}</td>
+                    <td class="float-left p-1 text-font">
                         Name
                     </td>
-                    <td class="text-right p-1 font-weight-bold tdtextfont">{{users.employeeName}}</td>
+                    <td class="text-right p-1 font-weight-bold td-text-font">{{user.employeeName}}</td>
                 </tr>
-                <tr class="tableRow">
-                    <td class="float-left p-1 textfont">
+                <tr class="table-row">
+                    <td class="float-left p-1 text-font">
                         Department
                     </td>
-                    <td class="text-right border-right border-dark p-1 font-weight-bold tdtextfont"> IT</td>
-                    <td class="float-left p-1 textfont">
+                    <td class="text-right border-right border-dark p-1 font-weight-bold td-text-font"> IT</td>
+                    <td class="float-left p-1 text-font">
                         Designation
                     </td>
-                    <td class="text-right p-1 font-weight-bold tdtextfont">{{users.Designation}}</td>
+                    <td class="text-right p-1 font-weight-bold td-text-font">{{user.Designation}}</td>
                 </tr>
-                <tr class="tableRow">
-                    <td class="float-left p-1 textfont">
+                <tr class="table-row">
+                    <td class="float-left p-1 text-font">
                         Account No
                     </td>
-                    <td class="text-right border-right border-dark p-1 font-weight-bold tdtextfont">{{users.accountNo}}</td>
-                    <td class="float-left p-1 textfont">
+                    <td class="text-right border-right border-dark p-1 font-weight-bold td-text-font">{{user.accountNo}}</td>
+                    <td class="float-left p-1 text-font">
                         PF Account No
                     </td>
-                    <td class="text-right p-1 font-weight-bold tdtextfont">{{users.providentfundNo}}</td>
+                    <td class="text-right p-1 font-weight-bold td-text-font">{{user.providentfundNo}}</td>
                 </tr>
-                <tr class="tableRow">
-                    <td class="float-left p-1 textfont">
+                <tr class="table-row">
+                    <td class="float-left p-1 text-font">
                         Date Of Joining
                     </td>
-                    <td class="text-right border-right border-dark p-1 font-weight-bold tdtextfont">{{users.D_O_J}}</td>
-                    <td class="float-left p-1 textfont">
+                    <td class="text-right border-right border-dark p-1 font-weight-bold td-text-font">{{user.D_O_J}}</td>
+                    <td class="float-left p-1 text-font">
                         No Of Days Worked
                     </td>
-                    <td class="text-right p-1 font-weight-bold tdtextfont">22</td>
+                    <td class="text-right p-1 font-weight-bold td-text-font">22</td>
                 </tr>
             </thead>
             <thead>
-                <tr class="tableRowHeading">
-                    <th scope="col" class="p-1 text-left tdtextfont ">Earnings</th>
-                    <th scope="col" class="p-1 text-right border-right border-dark tdtextfont">Amount</th>
-                    <th scope="col" class="p-1 tdtextfont">Deductions</th>
-                    <th scope="col" class="p-1 text-right tdtextfont">Amount</th>
+                <tr class="table-row-heading">
+                    <th scope="col" class="p-1 text-left td-text-font ">Earnings</th>
+                    <th scope="col" class="p-1 text-right border-right border-dark td-text-font">Amount</th>
+                    <th scope="col" class="p-1 td-text-font">Deductions</th>
+                    <th scope="col" class="p-1 text-right td-text-font">Amount</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="tableBodyRow">
-                    <td class="p-1 textfont ">Basic Pay</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont ">{{users.basicPay}}</td>
-                    <td class="p-1  textfont">TDS</td>
-                    <td class="p-1 font-weight-bold text-right tdtextfont">{{users.newTDS}}</td>
+                <tr class="table-body-row">
+                    <td class="p-1 text-font ">Basic Pay</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font ">{{user.basicPay}}</td>
+                    <td class="p-1  text-font">TDS</td>
+                    <td class="p-1 font-weight-bold text-right td-text-font">{{user.newTDS}}</td>
                 </tr>
-                <tr class="tableBodyRow">
-                    <td class="p-1 textfont">Dearness Allowances</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont">{{users.DA}}</td>
-                    <td class="p-1 textfont">Provident Fund</td>
-                    <td class="p-1 font-weight-bold text-right tdtextfont">{{users.PF}}</td>
+                <tr class="table-body-row">
+                    <td class="p-1 text-font">Dearness Allowances</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font">{{user.DA}}</td>
+                    <td class="p-1 text-font">Provident Fund</td>
+                    <td class="p-1 font-weight-bold text-right td-text-font">{{user.PF}}</td>
                 </tr>
-                <tr class="tableBodyRow">
-                    <td class="p-1 textfont">House Rent Allowances</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont">{{users.HRA}}</td>
-                    <td class="p-1 textfont">Professional Tax</td>
-                    <td class="p-1 font-weight-bold text-right tdtextfont">{{users.ProfessionalTax}}</td>
+                <tr class="table-body-row">
+                    <td class="p-1 text-font">House Rent Allowances</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font">{{user.HRA}}</td>
+                    <td class="p-1 text-font">Professional Tax</td>
+                    <td class="p-1 font-weight-bold text-right td-text-font">{{user.ProfessionalTax}}</td>
                 </tr>
-                <tr class="tableBodyRow">
-                    <td class="p-1 textfont">Special Allowances</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont">{{users.specialAllowance}}</td>
+                <tr class="table-body-row">
+                    <td class="p-1 text-font">Special Allowances</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font">{{user.specialAllowance}}</td>
                 </tr>
-                <tr class="tableBodyLastRow">
-                    <td class="p-1 textfont">Total Earnings</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont ">{{users.totalEarning}}</td>
-                    <td class="p-1 textfont">Total Deduction</td>
-                    <td class="p-1 font-weight-bold text-right tdtextfont">{{users.totalDeductions}}</td>
+                <tr class="table-body-last-row">
+                    <td class="p-1 text-font">Total Earnings</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font ">{{user.totalEarning}}</td>
+                    <td class="p-1 text-font">Total Deduction</td>
+                    <td class="p-1 font-weight-bold text-right td-text-font">{{user.totalDeductions}}</td>
                 </tr>
-                <tr class="tableBodyLastRow">
-                    <td class="p-1 textfont">Previous Balance</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont">0</td>
-                    <td class="p-1 textfont">NetPay</td>
-                    <td class="p-1 font-weight-bold text-right tdtextfont">{{users.netPay}}</td>
+                <tr class="table-body-last-row">
+                    <td class="p-1 text-font">Previous Balance</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font">0</td>
+                    <td class="p-1 text-font">NetPay</td>
+                    <td class="p-1 font-weight-bold text-right td-text-font">{{user.netPay}}</td>
                 </tr>
-                <tr class="tableBodyLastRow">
-                    <td class="p-1 textfont">Carry Over Round-Off</td>
-                    <td class="p-1 font-weight-bold text-right border-right border-dark tdtextfont">0</td>
+                <tr class="table-body-last-row">
+                    <td class="p-1 text-font">Carry Over Round-Off</td>
+                    <td class="p-1 font-weight-bold text-right border-right border-dark td-text-font">0</td>
                 </tr>
             </tbody>
         </table>
@@ -190,14 +190,15 @@
         <!--For Signature Purpose--->
         <div class="conatiner ml-5">
             <div class="d-flex justify-content-between">
-                <div class="EmployerSign textfont">
+                <div class="employer-sign text-font">
                     Employer's sign
                 </div>
             </div>
         </div>
+
         <!--This Div contains Disclaimer section-->
-        <div class="ml-5 textfont disclaimerDiv">
-            <h6 class="disclaimerDivHeading">Disclaimer</h6>
+        <div class="ml-5 text-font disclaimer-div">
+            <h6 class="disclaimer-div-heading">Disclaimer</h6>
             <p>Computer generated payslip does not require attestation.</p>
         </div>
     </div>
@@ -209,5 +210,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
 </body>
+
 </html>

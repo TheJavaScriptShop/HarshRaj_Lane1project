@@ -35,12 +35,12 @@ app.get('/form', (req, res) => {
 app.post('/response', urlencodedParser, (req, res) => {
 
 
-    let { employeeName,employeeID, month, salary, Designation,pf,dateOfJoining, professionalTax,accountNo,providentfundNo,TDS } = req.body;
+    let { employeeName,employeeID, month, salary, Designation,pf,D_O_J, professionalTax,accountNo,providentfundNo,TDS } = req.body;
 
     if (!req.body) {
         res.send("missing details")
     }
-
+    console.log(req.body)
     //Logic for salary details in payslip
     const basicPay = payment.basic(salary);
     const DA = payment.da(salary);
@@ -88,7 +88,7 @@ app.post('/response', urlencodedParser, (req, res) => {
             specialAllowance:newspecialAllowance,
             totalEarning:newtotalEarning,
             PF:providentFund,
-            dateOfJoining,
+            D_O_J,
             ProfessionalTax:newprofessionalTax,
             accountNo,
             providentfundNo,
@@ -97,7 +97,7 @@ app.post('/response', urlencodedParser, (req, res) => {
             netPay,
             host:process.env.URL
         }
-        
+       
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
