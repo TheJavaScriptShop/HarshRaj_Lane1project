@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT;
 
-
-
 const pdf = require("pdf-creator-node");
 const fs = require("fs");
 const path = require("path");
@@ -95,9 +93,8 @@ app.post('/response', urlencodedParser, (req, res) => {
             totalDeductions:newtotalDeductions,
             netPay
         }
-    
+
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
-    // var tempFilePath=`/Users/tjs3/Documents/pdf_generator/output/Payslip-${empid}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
         data: {
@@ -117,7 +114,6 @@ app.post('/response', urlencodedParser, (req, res) => {
             console.log(error)
         })
 });
-
 
 app.listen(port, () => {
     console.log(`Server is running at ${port}`);
