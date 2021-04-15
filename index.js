@@ -15,7 +15,7 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const payment=require('./paymentlogic')
+const payment=require('./paymentLogic')
 
 const pdfOptions = {
     format: "A4",
