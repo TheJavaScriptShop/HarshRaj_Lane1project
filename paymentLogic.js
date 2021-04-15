@@ -20,14 +20,14 @@ let special=(salary)=>{
 }
 
 let amountdata=(amt)=>{
-    let amtdata=amt;
-    amtdata=amtdata.toString();
-    let lastThree = amtdata.substring(amtdata.length-3);
-    let otherNumbers = amtdata.substring(0,amtdata.length-3);
+    let amount=amt;
+    amount=amount.toString();
+    let lastThree = amount.substring(amount.length-3);
+    let otherNumbers = amount.substring(0,amount.length-3);
     if(otherNumbers != '')
         lastThree = ',' + lastThree;
-    var finaldata= otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return finaldata
+    var finalamount= otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return finalamount;
 }
 module.exports={
     basic,
