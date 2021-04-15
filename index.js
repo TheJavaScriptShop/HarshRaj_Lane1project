@@ -15,7 +15,7 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 
 app.use(express.static('public'))
 
-const payment=require('./paymentLogic')
+const payment = require('./paymentLogic')
 
 const pdfOptions = {
     format: "A4",
@@ -33,28 +33,26 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-
-
-    let { employeeName,employeeID, month, salary, Designation,pf,D_O_J, professionalTax,accountNo,providentfundNo,TDS } = req.body;
+    let { employeeName, employeeID, month, salary, Designation, pf, D_O_J, professionalTax, accountNo, providentfundNo, TDS } = req.body;
 
     if (!req.body) {
         res.send("missing details")
     }
-    console.log(req.body)
+
     //Logic for salary details in payslip
     const basicPay = payment.basic(salary);
     const DA = payment.da(salary);
     const HRA = payment.hra(salary);
-    const specialAllowance = payment.special(salary) ;
+    const specialAllowance = payment.special(salary);
     const calculatedEarning = parseFloat(basicPay) + parseFloat(DA) + parseFloat(HRA) + parseFloat(specialAllowance);
     let PF = pf;
 
     //Logic for formatting payment details
-    const newbasicPay=payment.amountdata(basicPay);
-    const newDA=payment.amountdata(DA);
-    const newHRA=payment.amountdata(HRA);
-    const newspecialAllowance=payment.amountdata(specialAllowance);
-    const newtotalEarning=payment.amountdata(calculatedEarning)
+    const newbasicPay = payment.amountdata(basicPay);
+    const newDA = payment.amountdata(DA);
+    const newHRA = payment.amountdata(HRA);
+    const newspecialAllowance = payment.amountdata(specialAllowance);
+    const newtotalEarning = payment.amountdata(calculatedEarning)
 
     //Formating salary month
     let monthDate = month;
@@ -63,41 +61,40 @@ app.post('/response', urlencodedParser, (req, res) => {
     let getMonth = newmonthDate.toLocaleString('Default', { month: 'long' });
     let newDate = getMonth + ", " + monthYear;
 
-    let providentFund=PF==null?0:250;
+    let providentFund = PF == null ? 0 : 250;
     let ProfessionalTax = professionalTax;
-    let newprofessionalTax=ProfessionalTax==null?0:250
+    let newprofessionalTax = ProfessionalTax == null ? 0 : 250
 
     //Logic for total deductions and netPayment
-    let newTDS=Number(TDS)
-    let deductions=newTDS+providentFund+newprofessionalTax
-    const newtotalDeductions=payment.amountdata(deductions);
-    const totalPay=calculatedEarning-deductions;
-    const netPay=payment.amountdata(totalPay)
-    newTDS=payment.amountdata(newTDS)
+    let newTDS = Number(TDS)
+    let deductions = newTDS + providentFund + newprofessionalTax
+    const newtotalDeductions = payment.amountdata(deductions);
+    const totalPay = calculatedEarning - deductions;
+    const netPay = payment.amountdata(totalPay)
+    newTDS = payment.amountdata(newTDS)
 
     let user =
-        {
-            employeeName,
-            employeeID,
-            Designation,
-            month: newDate,
-            salary,
-            basicPay:newbasicPay,
-            DA:newDA,
-            HRA:newHRA,
-            specialAllowance:newspecialAllowance,
-            totalEarning:newtotalEarning,
-            PF:providentFund,
-            D_O_J,
-            ProfessionalTax:newprofessionalTax,
-            accountNo,
-            providentfundNo,
-            newTDS,
-            totalDeductions:newtotalDeductions,
-            netPay,
-            host:process.env.URL
-        }
-       
+    {
+        employeeName,
+        employeeID,
+        Designation,
+        month: newDate,
+        salary,
+        basicPay: newbasicPay,
+        DA: newDA,
+        HRA: newHRA,
+        specialAllowance: newspecialAllowance,
+        totalEarning: newtotalEarning,
+        PF: providentFund,
+        D_O_J,
+        ProfessionalTax: newprofessionalTax,
+        accountNo,
+        providentfundNo,
+        newTDS,
+        totalDeductions: newtotalDeductions,
+        netPay,
+        host: process.env.URL
+    }
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
