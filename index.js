@@ -1,21 +1,20 @@
 const express = require('express');
-const app = express()
 const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT;
-
 const pdf = require("pdf-creator-node");
 const fs = require("fs");
 const path = require("path");
-const html = fs.readFileSync(path.join(__dirname, "./public/template.html"), "utf8");
-
 const bodyparser = require('body-parser')
-app.use(bodyparser.json())
-const urlencodedParser = bodyparser.urlencoded({ extended: false })
-
-app.use(express.static('public'))
 
 const payment = require('./paymentLogic')
+
+const app = express()
+dotenv.config();
+const port = process.env.PORT;
+const html = fs.readFileSync(path.join(__dirname, "./public/template.html"), "utf8");
+const urlencodedParser = bodyparser.urlencoded({ extended: false })
+app.use(bodyparser.json())
+app.use(express.static('public'))
+
 
 const pdfOptions = {
     format: "A4",
@@ -48,11 +47,11 @@ app.post('/response', urlencodedParser, (req, res) => {
     let PF = pf;
 
     //Logic for formatting payment details
-    const newbasicPay = payment.amountdata(basicPay);
-    const newDA = payment.amountdata(DA);
-    const newHRA = payment.amountdata(HRA);
-    const newspecialAllowance = payment.amountdata(specialAllowance);
-    const newtotalEarning = payment.amountdata(calculatedEarning)
+    const newbasicPay = payment.amountData(basicPay);
+    const newDA = payment.amountData(DA);
+    const newHRA = payment.amountData(HRA);
+    const newspecialAllowance = payment.amountData(specialAllowance);
+    const newtotalEarning = payment.amountData(calculatedEarning)
 
     //Formating salary month
     let monthDate = month;
@@ -68,10 +67,10 @@ app.post('/response', urlencodedParser, (req, res) => {
     //Logic for total deductions and netPayment
     let newTDS = Number(TDS)
     let deductions = newTDS + providentFund + newprofessionalTax
-    const newtotalDeductions = payment.amountdata(deductions);
+    const newtotalDeductions = payment.amountData(deductions);
     const totalPay = calculatedEarning - deductions;
-    const netPay = payment.amountdata(totalPay)
-    newTDS = payment.amountdata(newTDS)
+    const netPay = payment.amountData(totalPay)
+    newTDS = payment.amountData(newTDS)
 
     let user =
     {
