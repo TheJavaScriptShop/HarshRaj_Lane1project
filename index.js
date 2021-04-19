@@ -33,7 +33,7 @@ app.get('/form', (req, res) => {
 
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
-    let { employeeName, employeeID, month, salary, Designation, pf, D_O_J, professionalTax, accountNo, providentfundNo, TDS } = req.body;
+    let { employeeName, employeeID, month, salary, Designation, pf, doj, professionalTax, accountNo, providentfundNo, TDS } = req.body;
 
     if (!req.body) {
         res.send("missing details")
@@ -86,7 +86,7 @@ app.post('/response', urlencodedParser, (req, res) => {
         specialAllowance: newspecialAllowance,
         totalEarning: newtotalEarning,
         PF: providentFund,
-        D_O_J,
+        doj,
         ProfessionalTax: newprofessionalTax,
         accountNo,
         providentfundNo,
