@@ -10,6 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>PDF-Generator</title>
+    <style>
+        .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    </style>
 </head>
 <script>
     function myFunction() {
@@ -25,13 +31,13 @@
     </nav>
 
     <div class="row">
-        <div class="col-lg-2 offset-lg-2 offset-xs-2">
+        <div class="col-lg-2 offset-lg-2 offset-xs-4">
             <h2 class="text-secondary">Payslip Form</h2>
         </div>
     </div>
 
-    <div>
-        <div class="col-sm-12 col-lg-8   offset-lg-2 border border-dark rounded bg-light p-2">
+    <div class="row px-4">
+        <div class="col-xs-12 offset-md-2 col-md-8 border border-dark rounded bg-light p-2">
             <form method="POST" action="/response" target="blank" id="myForm">
                 <div class="row">
                     <div class="col-xs-12 col-lg-6">
@@ -66,8 +72,8 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <div class="form-group">
-                            <label class="text-secondary" for="doj">Date Of Joining</label>
-                            <input type="date" class="form-control" id="doj" name="doj">
+                            <label class="text-secondary" for="D_O_J">Date Of Joining</label>
+                            <input type="date" class="form-control" id="D_O_J" name="D_O_J">
                         </div>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -84,8 +90,8 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <div class="form-group">
-                            <label class="text-secondary" for="tds">TDS</label>
-                            <input type="text" class="form-control" id="tds" name="tds">
+                            <label class="text-secondary" for="TDS">TDS</label>
+                            <input type="text" class="form-control" id="TDS" name="TDS">
                         </div>
                     </div>
                     <div class="col-xs-12 col-lg-6 mt-4">
@@ -105,13 +111,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Hello User!</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Hello User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Do you want to reset the form?
+                            Do You want to Reset the Form?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
