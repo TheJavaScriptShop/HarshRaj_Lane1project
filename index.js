@@ -32,8 +32,6 @@ app.get('/form', (req, res) => {
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
     let { employeeName, employeeID, month, salary, Designation, pf, doj, professionalTax, accountNo, providentfundNo, tds } = req.body;
-
-
     if (!req.body) {
         res.send("missing details")
     }
@@ -65,16 +63,14 @@ app.post('/response', urlencodedParser, (req, res) => {
     let providentFund = PF == null ? 0 : 250;
     let ProfessionalTax = professionalTax;
     let newprofessionalTax = ProfessionalTax == null ? 0 : 250
-     console.log(tds)
+
     //Logic for total deductions and netPayment
     let newTDS = Number(tds)
     let deductions = newTDS + providentFund + newprofessionalTax
-
     const newtotalDeductions = payment.amountData(deductions);
     const totalPay = calculatedEarning - deductions;
     const netPay = payment.amountData(totalPay)
     newTDS = payment.amountData(newTDS)
-
 
     let user =
     {
@@ -89,9 +85,7 @@ app.post('/response', urlencodedParser, (req, res) => {
         specialAllowance: newspecialAllowance,
         totalEarning: newtotalEarning,
         PF: providentFund,
-
         doj,
-
         ProfessionalTax: newprofessionalTax,
         accountNo,
         providentfundNo,
