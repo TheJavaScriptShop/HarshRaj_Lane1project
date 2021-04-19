@@ -16,6 +16,9 @@ app.use(bodyparser.json())
 app.use(express.static('public'))
 
 
+const payment = require('./paymentLogic')
+
+
 const pdfOptions = {
     format: "A4",
     orientation: "portrait",
@@ -34,6 +37,7 @@ app.get('/form', (req, res) => {
 app.post('/response', urlencodedParser, (req, res) => {
     let { employeeName, employeeID, month, salary, Designation, pf, doj, professionalTax, accountNo, providentfundNo, tds } = req.body;
 
+
     if (!req.body) {
         res.send("missing details")
     }
@@ -47,11 +51,13 @@ app.post('/response', urlencodedParser, (req, res) => {
     let PF = pf;
 
     //Logic for formatting payment details
+
     const newbasicPay = payment.amountData(basicPay);
     const newDA = payment.amountData(da);
     const newHRA = payment.amountData(hra);
     const newspecialAllowance = payment.amountData(specialAllowance);
     const newtotalEarning = payment.amountData(calculatedEarning)
+
 
     //Formating salary month
     let monthDate = month;
@@ -67,10 +73,12 @@ app.post('/response', urlencodedParser, (req, res) => {
     //Logic for total deductions and netPayment
     let newTDS = Number(tds)
     let deductions = newTDS + providentFund + newprofessionalTax
+
     const newtotalDeductions = payment.amountData(deductions);
     const totalPay = calculatedEarning - deductions;
     const netPay = payment.amountData(totalPay)
     newTDS = payment.amountData(newTDS)
+
 
     let user =
     {
@@ -85,7 +93,9 @@ app.post('/response', urlencodedParser, (req, res) => {
         specialAllowance: newspecialAllowance,
         totalEarning: newtotalEarning,
         PF: providentFund,
+
         doj,
+
         ProfessionalTax: newprofessionalTax,
         accountNo,
         providentfundNo,
