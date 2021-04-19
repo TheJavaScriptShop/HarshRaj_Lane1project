@@ -15,10 +15,6 @@ const urlencodedParser = bodyparser.urlencoded({ extended: false })
 app.use(bodyparser.json())
 app.use(express.static('public'))
 
-
-const payment = require('./paymentLogic')
-
-
 const pdfOptions = {
     format: "A4",
     orientation: "portrait",
@@ -69,7 +65,7 @@ app.post('/response', urlencodedParser, (req, res) => {
     let providentFund = PF == null ? 0 : 250;
     let ProfessionalTax = professionalTax;
     let newprofessionalTax = ProfessionalTax == null ? 0 : 250
-
+     console.log(tds)
     //Logic for total deductions and netPayment
     let newTDS = Number(tds)
     let deductions = newTDS + providentFund + newprofessionalTax
