@@ -95,6 +95,10 @@ app.post('/response', urlencodedParser, (req, res) => {
         netPay,
         host: process.env.URL
     }
+    const bitmap = fs.readFileSync(__dirname + "/public/banner-with-logo.png");
+    const logo = bitmap.toString('base64');
+    user.banner = logo;
+    const fileName = user.month.toString().replace(/,/g, "_").replace(" ", "");
     let pdfFilePath = `./output/Payslip-${employeeID}-${Math.floor(new Date().getTime() / 1000)}.pdf`;
     let document = {
         html: html,
@@ -108,7 +112,7 @@ app.post('/response', urlencodedParser, (req, res) => {
         .then(() => {
             let file = fs.createReadStream(pdfFilePath);
             res.writeHead(200,
-                { 'Content-disposition': 'attachment; filename=payslip.pdf' }); //here you can specify file name
+                { 'Content-disposition': `attachment; filename=${fileName}_payslip.pdf` }); //here you can specify file name
             file.pipe(res);
         })
         .catch((error) => {
