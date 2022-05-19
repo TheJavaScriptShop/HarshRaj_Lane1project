@@ -31,6 +31,12 @@ app.get('/form', (req, res) => {
     res.sendFile(path.join(__dirname, 'public'))
 })
 
+const moneyFormatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2
+});
+
 //api to get response
 app.post('/response', urlencodedParser, (req, res) => {
     let { employeeName, employeeID, month, salary, Designation, pf, D_O_J, professionalTax, accountNo, providentfundNo, TDS } = req.body;
@@ -48,11 +54,11 @@ app.post('/response', urlencodedParser, (req, res) => {
     let PF = pf;
 
     //Logic for formatting payment details
-    const newbasicPay = payment.amountdata(basicPay);
-    const newDA = payment.amountdata(DA);
-    const newHRA = payment.amountdata(HRA);
-    const newspecialAllowance = payment.amountdata(specialAllowance);
-    const newtotalEarning = payment.amountdata(calculatedEarning)
+    const newbasicPay = moneyFormatter.format(basicPay.toFixed(2));
+    const newDA = moneyFormatter.format(DA.toFixed(2));
+    const newHRA = moneyFormatter.format(HRA.toFixed(2));
+    const newspecialAllowance = moneyFormatter.format(specialAllowance.toFixed(2));
+    const newtotalEarning = moneyFormatter.format(calculatedEarning.toFixed(2));
 
     //Formating salary month
     let monthDate = month;
@@ -68,10 +74,10 @@ app.post('/response', urlencodedParser, (req, res) => {
     //Logic for total deductions and netPayment
     let newTDS = Number(TDS)
     let deductions = newTDS + providentFund + newprofessionalTax
-    const newtotalDeductions = payment.amountdata(deductions);
-    const totalPay = calculatedEarning - deductions;
-    const netPay = payment.amountdata(totalPay)
-    newTDS = payment.amountdata(newTDS)
+    const newtotalDeductions = moneyFormatter.format(deductions.toFixed(2));
+    const totalPay = (calculatedEarning - deductions);
+    const netPay = moneyFormatter.format(totalPay.toFixed(2));
+    newTDS = moneyFormatter.format(newTDS.toFixed(2))
 
     let user =
     {
